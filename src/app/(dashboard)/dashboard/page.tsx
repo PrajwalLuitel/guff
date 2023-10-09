@@ -13,7 +13,7 @@ const page  = async () => {
 
   return (
     <pre>
-      {JSON.stringify(session)}
+      DASHBOARD
     </pre>
   )
 }
