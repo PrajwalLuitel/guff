@@ -1,6 +1,8 @@
 import { fetchRedis } from "@/helpers/redis";
 import { authOptions } from "@/utils/auth";
 import { db } from "@/utils/db";
+import { pusherServer } from "@/utils/pusher";
+import { toPusherKey } from "@/utils/uitls";
 import { addFriendValidator } from "@/utils/validations/add-friend";
 import { getServerSession } from "next-auth";
 import { z } from "zod";
@@ -64,6 +66,14 @@ export async function POST(req: Request) {
     //     senderEmail: session.user.email,
     //   }
     // )
+
+    pusherServer.trigger(
+      toPusherKey(`user:${idToAdd}:incoming_friend_requests`), 'incoming_friend_requests',
+        {
+          senderId: session.user.id,
+        senderEmail: session.user.email,}
+      
+    )
 
     await db.sadd(`user:${idToAdd}:incoming_friend_requests`, session.user.id)
 
