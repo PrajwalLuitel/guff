@@ -16,23 +16,28 @@ import { SidebarOption } from "@/types/typings";
 import { usePathname } from "next/navigation";
 
 interface MobileChatLayoutProps {
-    friends: User[];
-    session: Session;
-    sidebarOptions: SidebarOption[];
-    unseenRequestCount: number;
+  friends: User[];
+  session: Session;
+  sidebarOptions: SidebarOption[];
+  unseenRequestCount: number;
 }
 
-const MobileChatLayout: FC<MobileChatLayoutProps> = ({friends, session, sidebarOptions, unseenRequestCount }) => {
-    const [open, setOpen] = useState<boolean>(false);
-    
-    const pathname = usePathname();
+const MobileChatLayout: FC<MobileChatLayoutProps> = ({
+  friends,
+  session,
+  sidebarOptions,
+  unseenRequestCount,
+}) => {
+  const [open, setOpen] = useState<boolean>(false);
 
-    useEffect(() => {
-        setOpen(false);  
-    },[pathname])
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
-    <div className="fixed bg-zinc-50 border-b border-zinc-200 top-0 inset-x-0 py-6 px-4 ">
+    <div className="fixed bg-gradient-to-b from-white to-emerald-100/40 border-b border-zinc-200 top-0 inset-x-0 py-6 px-4 ">
       <div className="w-full flex justify-between items-center ">
         <Link
           href="/dashboard"
@@ -61,7 +66,7 @@ const MobileChatLayout: FC<MobileChatLayoutProps> = ({friends, session, sidebarO
                   leaveTo="-translate-x-full"
                 >
                   <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                    <div className="flex h-full flex-col overflow-hidden bg-white py-6 shadow-xl">
+                    <div className="flex h-full flex-col overflow-hidden bg-gradient-to-b from-white to-emerald-100 py-6 shadow-xl">
                       <div className="px-4 sm:px-6">
                         <div className="flex items-start justify-between">
                           <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
@@ -70,7 +75,7 @@ const MobileChatLayout: FC<MobileChatLayoutProps> = ({friends, session, sidebarO
                           <div className="ml-3 flex h-7 items-center">
                             <button
                               type="button"
-                              className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                              className="rounded-md bg-white text-emerald-800 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                               onClick={() => setOpen(false)}
                             >
                               <span className="sr-only">Close panel</span>
@@ -111,9 +116,9 @@ const MobileChatLayout: FC<MobileChatLayoutProps> = ({friends, session, sidebarO
                                     <li key={option.name}>
                                       <Link
                                         href={option.href}
-                                        className="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                        className="text-gray-700 hover:text-emerald-800 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                       >
-                                        <span className="text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white">
+                                        <span className="text-emerald-700 border-emerald-200 group-hover:border-emerald-800 group-hover:text-emerald-800 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white">
                                           <Icon className="h-4 w-4" />
                                         </span>
                                         <span className="truncate">

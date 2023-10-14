@@ -78,8 +78,8 @@ const Messages: FC<MessagesProps> = ({
               >
                 <span
                   className={cn("px-4 py-2 rounded-lg inline-block", {
-                    "bg-indigo-600 text-white": isCurrentUser,
-                    "bg-gray-200 text-gray-900": !isCurrentUser,
+                    "bg-emerald-700 text-white": isCurrentUser,
+                    "bg-fuchsia-950 text-gray-100": !isCurrentUser,
                     "rounded-br-none":
                       !hasNextMessageFromSameUser && isCurrentUser,
                     "rounded-bl-none":
@@ -87,7 +87,7 @@ const Messages: FC<MessagesProps> = ({
                   })}
                 >
                   {message.text}{" "}
-                  <span className="ml-2 text-xs text-gray-400">
+                  <span className="ml-2 text-xs text-gray-300">
                     {formatTimeStamp(message.timestamp)}
                   </span>
                 </span>

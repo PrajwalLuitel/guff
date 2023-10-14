@@ -20,21 +20,25 @@ const FriendRequests: FC<FriendRequestsProps> = ({
     incomingFriendRequests
   );
 
-  const friendRequestHandler = ({senderId, senderEmail}: IncomingFriendRequest) => {
+  const friendRequestHandler = ({
+    senderId,
+    senderEmail,
+  }: IncomingFriendRequest) => {
     setFriendRequests((prev) => [...prev, { senderId, senderEmail }]);
   };
-  
+
   useEffect(() => {
     pusherClient.subscribe(
       toPusherKey(`user:${sessionId}:incoming_friend_requests`)
-      );
+    );
     pusherClient.bind("incoming_friend_requests", friendRequestHandler);
-    
-    return () => {
-      pusherClient.unsubscribe(toPusherKey(`user:${sessionId}:incoming_friend_requests`));
-      pusherClient.unbind("incoming_friend_requests", friendRequestHandler);
-      }
 
+    return () => {
+      pusherClient.unsubscribe(
+        toPusherKey(`user:${sessionId}:incoming_friend_requests`)
+      );
+      pusherClient.unbind("incoming_friend_requests", friendRequestHandler);
+    };
   }, [sessionId]);
 
   const router = useRouter();
@@ -62,13 +66,16 @@ const FriendRequests: FC<FriendRequestsProps> = ({
         </p>
       ) : (
         friendRequests.map((request) => (
-          <div key={request.senderId} className="flex gap-4 items-center">
+          <div
+            key={request.senderId}
+            className="flex gap-4 py-6 mb-2 items-center bg-gradient-to-b from-white to-emerald-100/40"
+          >
             <UserPlus className="text-black" />
             <p className="font-medium text-lg">{request.senderEmail}</p>
             <button
               onClick={() => acceptFriend(request.senderId)}
               aria-label="accept friend"
-              className="w-8 h-8 bg-indigo-600 hover:bg-indigo-700 grid place-items-center rounded-full transition hover:shadow-md"
+              className="w-8 h-8 bg-emerald-600 hover:bg-emerald-800 grid place-items-center rounded-full transition hover:shadow-md"
             >
               <Check className="font-semibold text-white w-3/4 h-3/4 " />
             </button>

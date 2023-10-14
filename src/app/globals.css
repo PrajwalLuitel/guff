@@ -8,6 +8,19 @@
   }
 }
 
+.login-bg {
+  background-image: url("/images/texting.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.9;
+}
+
+@media screen and (max-width: 760px) {
+  .login-bg {
+    background: none;
+  }
+}
+
 .scrollbar-w-2::-webkit-scrollbar {
   width: 0.25rem;
   height: 0.25rem;

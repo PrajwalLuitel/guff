@@ -1,5 +1,5 @@
 import FriendRequestsSidebarOptions from "@/components/FriendRequestsSidebarOptions";
-import { Icon, Icons } from "@/components/Icons";
+import { Icons } from "@/components/Icons";
 import SidebarChatList from "@/components/SidebarChatList";
 import SignOutButton from "@/components/SignOutButton";
 import { getFriendsByUserId } from "@/helpers/get-friends-by-user-id";
@@ -9,16 +9,20 @@ import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 import { logo_with_name } from "../../../../public/images/images";
 import MobileChatLayout from "@/components/MobileChatLayout";
 import { SidebarOption } from "@/types/typings";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Guff - Dashboard",
+  description: "The Main Dashboard For Quick Realtime Chat Application For You",
+};
 
 interface LayoutProps {
   children: ReactNode;
 }
-
-
 
 const sidebarOptions: SidebarOption[] = [
   {
@@ -45,10 +49,15 @@ const Layout = async ({ children }: LayoutProps) => {
   return (
     <div className="w-full flex h-screen">
       <div className="md:hidden py-6">
-        <MobileChatLayout friends={friends} session={session} sidebarOptions={sidebarOptions} unseenRequestCount={unseenRequestCount } />
+        <MobileChatLayout
+          friends={friends}
+          session={session}
+          sidebarOptions={sidebarOptions}
+          unseenRequestCount={unseenRequestCount}
+        />
       </div>
 
-      <div className="hidden md:flex h-full w-full max-w-xs grow flex-col gap-y-5 overflow-y-auto overflow-x-hidden border-r border-gray-200 bg-white px-3">
+      <div className="hidden md:flex h-full w-full max-w-xs grow flex-col gap-y-5 overflow-y-auto overflow-x-hidden border-r border-gray-200 bg-gradient-to-b from-white to-emerald-100/70 px-3">
         <Link
           href="/dashboard"
           className="flex h-16 shrink-0 items-center mb-10 pt-4 pl-4"
@@ -62,7 +71,7 @@ const Layout = async ({ children }: LayoutProps) => {
         </Link>
 
         {friends.length > 0 ? (
-          <div className="text-xs font-semibold leading-6 text-gray-400">
+          <div className="text-xs font-semibold leading-6 text-green-700/80">
             Your Chats
           </div>
         ) : null}
@@ -72,7 +81,7 @@ const Layout = async ({ children }: LayoutProps) => {
               <SidebarChatList sessionId={session.user.id} friends={friends} />
             </li>
             <li>
-              <div className="text-xs font-semibold leading-6 text-gray-400">
+              <div className="text-xs font-semibold leading-6 text-green-700/80">
                 Overview
               </div>
 
@@ -83,9 +92,9 @@ const Layout = async ({ children }: LayoutProps) => {
                     <li key={option.id}>
                       <Link
                         href={option.href}
-                        className="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                        className="text-gray-700 hover:text-emerald-700 hover:bg-gray-50 group flex gap-3 rounded-md p-2 text-sm leading-6 font-semibold"
                       >
-                        <span className="text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white">
+                        <span className="text-emerald-700 border-emerald-200 group-hover:border-emerald-700 group-hover:text-emerald-700 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white">
                           <Icon className="h-4 w-4" />
                         </span>
                         <span className="truncate">{option.name}</span>
@@ -121,7 +130,7 @@ const Layout = async ({ children }: LayoutProps) => {
                   </span>
                 </div>
                 <div>
-                  <SignOutButton className="h-full aspect-square" />
+                  <SignOutButton className="h-full hover:bg-white aspect-square" />
                 </div>
               </div>
             </li>

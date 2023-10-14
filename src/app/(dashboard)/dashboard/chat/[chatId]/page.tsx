@@ -53,13 +53,16 @@ const page: FC<pageProps> = async ({ params }: pageProps) => {
   const chatPartnerId = user.id === userId1 ? userId2 : userId1;
 
   // const chatPartner = (await db.get(`user:${chatPartnerId}`)) as User;
-  const chatPartnerRaw = await fetchRedis('get', `user:${chatPartnerId}`) as string;
+  const chatPartnerRaw = (await fetchRedis(
+    "get",
+    `user:${chatPartnerId}`
+  )) as string;
   const chatPartner = JSON.parse(chatPartnerRaw) as User;
 
   const initialMessages = await getChatMessages(chatId);
 
   return (
-    <div className="flex-1 justify-between flex flex-col h-full max-h-[calc(100vh-6rem)]">
+    <div className="flex-1 justify-between flex flex-col h-full max-h-[calc(100vh-6rem)] max-sm:mt-10">
       <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
         <div className="relative flex items-center space-x-4">
           <div className="relative">
@@ -85,8 +88,14 @@ const page: FC<pageProps> = async ({ params }: pageProps) => {
         </div>
       </div>
 
-      <Messages chatPartner={chatPartner} sessionImg={session.user.image} chatId={chatId} initialMessages={initialMessages} sessionId={session.user.id} />
-      <ChatInput chatPartner={chatPartner} chatId={chatId}/>
+      <Messages
+        chatPartner={chatPartner}
+        sessionImg={session.user.image}
+        chatId={chatId}
+        initialMessages={initialMessages}
+        sessionId={session.user.id}
+      />
+      <ChatInput chatPartner={chatPartner} chatId={chatId} />
     </div>
   );
 };

@@ -21,11 +21,11 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
     setIsLoading(true);
 
     try {
-      await axios.post('/api/message/send', { text: input, chatId });
+      await axios.post("/api/message/send", { text: input, chatId });
       setInput("");
       textareaRef.current?.focus();
     } catch (error) {
-        toast.error("Something went wrong, please try again later !");
+      toast.error("Something went wrong, please try again later !");
     } finally {
       setIsLoading(false);
     }
@@ -33,7 +33,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 
   return (
     <div className="border-t border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
-      <div className="relateive flex-1 overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
+      <div className="relateive flex-1 overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-emerald-600">
         <TextareaAutosize
           ref={textareaRef}
           onKeyDown={(e) => {
@@ -59,7 +59,12 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
         </div>
         <div className=" right-0 bottom-0 flex justify-end py-2 pl-3 pr-2">
           <div className="flex-shrink-0">
-            <Button isLoading={isLoading} onClick={sendMessage} type="submit">
+            <Button
+              isLoading={isLoading}
+              onClick={sendMessage}
+              className="bg-gradient-to-tr from-lime-800 to-sky-800"
+              type="submit"
+            >
               Send Message
             </Button>
           </div>
