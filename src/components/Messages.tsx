@@ -21,6 +21,7 @@ const Messages: FC<MessagesProps> = ({
 }) => {
 
     const [messages, setMessages] = useState<Message[]>(initialMessages);
+    
 
     const scrolldownRef = useRef<HTMLDivElement | null>(null);
 
