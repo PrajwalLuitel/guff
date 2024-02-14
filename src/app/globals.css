@@ -9,16 +9,9 @@
 }
 
 .login-bg {
-  background-image: url("/images/texting.jpeg");
+  background-image: url("https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.9;
-}
-
-@media screen and (max-width: 760px) {
-  .login-bg {
-    background: none;
-  }
 }
 
 .scrollbar-w-2::-webkit-scrollbar {
